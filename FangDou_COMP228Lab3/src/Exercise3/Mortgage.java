@@ -8,15 +8,16 @@ public abstract class Mortgage implements MortgageConstants {
     protected int term;
 
     public Mortgage(String mortgageNumber, String customerName, double amount, double interestRate, int term) {
-        if (amount > MAX_MORTGAGE_AMOUNT) {
-            throw new IllegalArgumentException("Mortgage amount cannot exceed $" + MAX_MORTGAGE_AMOUNT);
+        if (amount > maxMortgageAmount) {
+            System.out.println("mortgage amounts over the max limit");
+            return;
         }
         this.mortgageNumber = mortgageNumber;
         this.customerName = customerName;
         this.amount = amount;
         this.interestRate = interestRate;
-        if (term != SHORT_TERM && term != MEDIUM_TERM && term != LONG_TERM) {
-            this.term = SHORT_TERM;  // Default to short-term if an invalid term is provided
+        if (term != shortTerm && term != mediumTerm && term != longTerm) {
+            this.term = shortTerm;
         } else {
             this.term = term;
         }
@@ -29,13 +30,7 @@ public abstract class Mortgage implements MortgageConstants {
     public abstract String getMortgageType();
 
     public String getMortgageInfo() {
-        return "Mortgage Number: " + mortgageNumber + "\n" +
-                "Customer Name: " + customerName + "\n" +
-                "Mortgage Type: " + getMortgageType() + "\n" +
-                "Amount: $" + amount + "\n" +
-                "Interest Rate: " + interestRate + "%\n" +
-                "Term: " + term + " years\n" +
-                "Total Amount Owed: $" + calculateTotalOwed() + "\n";
+        return "--- " + bankName + " ---" + "\nMortgage Type: " + getMortgageType() + "\nMortgage Number: " + mortgageNumber + "\nCustomer Name: " + customerName + "\nAmount: $" + amount + "\nInterest Rate: " + interestRate + "%\nTerm: " + term + " years" + "\nTotal Amount Owed: $" + calculateTotalOwed() + "\n";
     }
 }
 

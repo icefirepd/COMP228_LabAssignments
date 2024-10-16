@@ -1,18 +1,14 @@
 package Exercise2;
 
-// Part-time Game Tester subclass
 class PartTimeGameTester extends GameTester {
-    private int hoursWorked;
-    private final double hourlyRate = 20.0;
+    private int hours;
 
-    public PartTimeGameTester(String name, int hoursWorked) {
+    public PartTimeGameTester(String name, int hours) {
         super(name, false);
-        this.hoursWorked = hoursWorked;
+        this.hours = hours;
     }
 
-    @Override
-    public double calculateSalary() {
-        return hoursWorked * hourlyRate;
+    public @Override double salary() {
+        return hours * 20;
     }
 }
-

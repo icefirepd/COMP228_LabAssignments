@@ -1,49 +1,42 @@
 package Exercise3;
-
-import java.util.Scanner;
+import java.io.Console;
 
 public class ProcessMortgage {
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Console console = System.console();
+
+        System.out.print("Enter the current interest rate (%): ");
+        double interestRate = Double.parseDouble(console.readLine());
+
         Mortgage[] mortgages = new Mortgage[3];
 
-        System.out.print("Enter the current prime interest rate: ");
-        double primeRate = input.nextDouble();
-
-        for (int i = 0; i < mortgages.length; i++) {
-            System.out.println("\nMortgage #" + (i + 1));
-
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Enter mortgage type (B for Business, P for Personal): ");
+            String mortgageType = console.readLine();
+            if (!mortgageType.equals("P") && !mortgageType.equals("B")) {
+                System.out.print("Wrong mortgage type.");
+                return;
+            }
             System.out.print("Enter mortgage number: ");
-            String mortgageNumber = input.next();
-
+            String mortgageNumber = console.readLine();
             System.out.print("Enter customer name: ");
-            String customerName = input.next();
-
+            String customerName = console.readLine();
             System.out.print("Enter mortgage amount: ");
-            double amount = input.nextDouble();
+            double amount = Double.parseDouble(console.readLine());
+            System.out.print("Enter term (1=short, 3=medium, 5=long): ");
+            int term = Integer.parseInt(console.readLine());
 
-            System.out.print("Enter term (1 for short, 3 for medium, 5 for long): ");
-            int term = input.nextInt();
 
-            System.out.print("Enter mortgage type (1 for Business, 2 for Personal): ");
-            int mortgageType = input.nextInt();
-
-            if (mortgageType == 1) {
-                mortgages[i] = new BusinessMortgage(mortgageNumber, customerName, amount, primeRate, term);
-            } else if (mortgageType == 2) {
-                mortgages[i] = new PersonalMortgage(mortgageNumber, customerName, amount, primeRate, term);
+            if (mortgageType.equals("B")) {
+                mortgages[i] = new BusinessMortgage(mortgageNumber, customerName, amount, interestRate, term);
             } else {
-                System.out.println("Invalid mortgage type. Defaulting to Personal Mortgage.");
-                mortgages[i] = new PersonalMortgage(mortgageNumber, customerName, amount, primeRate, term);
+                mortgages[i] = new PersonalMortgage(mortgageNumber, customerName, amount, interestRate, term);
             }
         }
 
-        System.out.println("\n--- Mortgage Details ---");
+        System.out.println("Display all mortgages:\n");
         for (Mortgage mortgage : mortgages) {
             System.out.println(mortgage.getMortgageInfo());
         }
-
-        input.close();
     }
 }

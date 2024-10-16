@@ -1,31 +1,31 @@
 package Exercise2;
-import java.util.Scanner;
+import java.io.Console;
+
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Console console = System.console();
+        String name = null;
 
-        System.out.println("Enter the name of the game tester:");
-        String name = scanner.nextLine();
-
-        System.out.println("Choose the type of game tester (1 for Full-time, 2 for Part-time):");
-        int testerType = scanner.nextInt();
-
-        GameTester tester;
-
-        if (testerType == 1) {
-            // Create a full-time game tester
-            tester = new FullTimeGameTester(name);
-        } else {
-            // Create a part-time game tester
-            System.out.println("Enter the number of hours worked:");
-            int hoursWorked = scanner.nextInt();
-            tester = new PartTimeGameTester(name, hoursWorked);
+        System.out.print("Choose game tester type (F for Full-time, P for Part-time): ");
+        String type = console.readLine();
+        if (type.equals("F") || type.equals("P")) {
+            System.out.print("Enter game tester name: ");
+            name = console.readLine();
+        }
+        else {
+            System.out.println("Wrong input.");
+            return;
         }
 
-        // Output the salary of the game tester
-        System.out.println("Game Tester: " + tester.name);
-        System.out.println("Salary: $" + tester.calculateSalary());
+        GameTester tester;
+        if (type.equals("F")) {
+            tester = new FullTimeGameTester(name);
+        } else {
+            System.out.print("Enter number of hours worked: ");
+            tester = new PartTimeGameTester(name, Integer.parseInt(console.readLine()));
+        }
 
-        scanner.close();
+        System.out.println("Tester: " + tester.name);
+        System.out.println("Salary: $" + tester.salary());
     }
 }

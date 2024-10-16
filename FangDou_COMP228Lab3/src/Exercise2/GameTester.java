@@ -2,13 +2,12 @@ package Exercise2;
 
 abstract class GameTester {
     protected String name;
-    protected boolean isFullTime;
+    protected boolean status;
 
-    public GameTester(String name, boolean isFullTime) {
+    public GameTester(String name, boolean status) {
         this.name = name;
-        this.isFullTime = isFullTime;
+        this.status = status;
     }
 
-    // Abstract method to determine salary
-    public abstract double calculateSalary();
+    public abstract double salary();
 }

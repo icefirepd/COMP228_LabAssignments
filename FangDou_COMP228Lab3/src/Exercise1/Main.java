@@ -1,44 +1,30 @@
 package Exercise1;
-
-import java.util.Scanner;
+import java.io.Console;
 
 public class Main {
     public static void main(String[] args) {
-        // Scanner for user input
-        Scanner scanner = new Scanner(System.in);
-        Insurance[] insuranceArray = new Insurance[2]; // Array to hold insurance objects
+        Console console = System.console();
 
-        // Loop to create insurance objects
-        for (int i = 0; i < insuranceArray.length; i++) {
-            System.out.println("Enter the type of insurance (Health or Life):");
-            String type = scanner.nextLine();
-
-            System.out.println("Enter the monthly cost of the insurance:");
-            double cost = scanner.nextDouble();
-            scanner.nextLine(); // Consume the newline character
-
-            if (type.equalsIgnoreCase("Health")) {
-                insuranceArray[i] = new Health();
-            } else if (type.equalsIgnoreCase("Life")) {
-                insuranceArray[i] = new Life();
-            } else {
-                System.out.println("Invalid insurance type. Skipping.");
-                i--; // Ensure that the loop continues correctly
-                continue;
-            }
-
-            // Setting the cost of the insurance
-            insuranceArray[i].setInsuranceCost(cost);
+        System.out.print("Enter the type of insurance (Health or Life): ");
+        String insurType = console.readLine();
+        if (!insurType.equals("Health") && !insurType.equals("Life")) {
+            System.out.println("Wrong input.");
+            return;
         }
 
-        // Polymorphic screen manager to display insurance info
-        System.out.println("\nInsurance Details:");
-        for (Insurance insurance : insuranceArray) {
-            insurance.displayInfo();
-            System.out.println("--------------------");
-        }
+        System.out.print("Enter the monthly cost of the insurance: ");
+        double cost = Double.parseDouble(console.readLine());
 
-        scanner.close();
+        Insurance insurance = null;
+        switch (insurType.toLowerCase()) {
+            case "health":
+                insurance = new Health();
+                break;
+            case "life":
+                insurance = new Life();
+                break;
+        }
+        insurance.setInsuranceCost(cost);
+        insurance.displayInfo();
     }
 }
-

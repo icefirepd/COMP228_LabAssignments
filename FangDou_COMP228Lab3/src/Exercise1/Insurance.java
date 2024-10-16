@@ -1,26 +1,16 @@
 package Exercise1;
 
 abstract class Insurance {
-    // Instance variables
-    protected String insuranceType;
+    protected String insurType;
     protected double monthlyCost;
 
-    // Constructor
-    public Insurance(String insuranceType) {
-        this.insuranceType = insuranceType;
+    public Insurance(String insurType) {
+        this.insurType = insurType;
     }
 
-    // Getter methods
-    public String getInsuranceType() {
-        return insuranceType;
-    }
+    public String getInsurType() { return insurType; }
+    public double getMonthlyCost() { return monthlyCost; }
 
-    public double getMonthlyCost() {
-        return monthlyCost;
-    }
-
-    // Abstract methods to be implemented by subclasses
     public abstract void setInsuranceCost(double cost);
     public abstract void displayInfo();
 }
-

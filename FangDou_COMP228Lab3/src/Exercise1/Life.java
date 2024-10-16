@@ -1,23 +1,16 @@
 package Exercise1;
 
-class Life extends Insurance {
-
-    // Constructor
+public class Life extends Insurance {
     public Life() {
-        super("Life Insurance");
+        super("Life");
     }
 
-    // Implementing abstract method to set the insurance cost
-    @Override
-    public void setInsuranceCost(double cost) {
+    public @Override void setInsuranceCost(double cost) {
         this.monthlyCost = cost;
     }
 
-    // Implementing abstract method to display insurance information
-    @Override
-    public void displayInfo() {
-        System.out.println("Insurance Type: " + insuranceType);
-        System.out.println("Monthly Cost: $" + monthlyCost);
+    public @Override void displayInfo() {
+        System.out.println("Insurance Type: " + getInsurType());
+        System.out.println("Monthly Cost: $" + getMonthlyCost());
     }
 }
-
